@@ -3,13 +3,16 @@ package controllers
 import models.Greeting
 import play.api.i18n.Langs
 import play.api.libs.json.Json
-import play.api.mvc.{AbstractController, ControllerComponents}
+import play.api.mvc.{AbstractController, ControllerComponents, RequestHeader}
 import play.twirl.api.Html
 import services.GreetingService
 
-class GreeterController(greetingService: GreetingService,
-                        langs: Langs,
-                        cc: ControllerComponents) extends AbstractController(cc) {
+class GreeterController(
+  request: RequestHeader,
+  greetingService: GreetingService,
+  langs: Langs,
+  cc: ControllerComponents
+) extends AbstractController(cc) {
 
   val greetingsList = Seq(
     Greeting(1, greetingService.greetingMessage("en"), "sameer"),
